@@ -1,0 +1,99 @@
+Microsoft Windows [versão 10.0.19043.1165]
+(c) Microsoft Corporation. Todos os direitos reservados.
+
+C:\Users\Alunos>cd c:\xampp\mysql\bin
+
+c:\xampp\mysql\bin>mysql -u root
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 34
+Server version: 10.4.17-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| phpmyadmin         |
+| revisao            |
+| test               |
++--------------------+
+6 rows in set (0.001 sec)
+
+MariaDB [(none)]> use revisao;
+Database changed
+MariaDB [revisao]> show tables
+    -> /
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '/' at line 2
+MariaDB [revisao]> show tables;
++-------------------+
+| Tables_in_revisao |
++-------------------+
+| clientes          |
+| compra            |
+| produto           |
++-------------------+
+3 rows in set (0.001 sec)
+
+MariaDB [revisao]> describe clientes;
++------------+--------------+------+-----+---------+----------------+
+| Field      | Type         | Null | Key | Default | Extra          |
++------------+--------------+------+-----+---------+----------------+
+| nome       | varchar(255) | YES  |     | NULL    |                |
+| id_cliente | int(11)      | NO   | PRI | NULL    | auto_increment |
+| estado     | char(3)      | YES  |     | NULL    |                |
+| email      | varchar(255) | YES  |     | NULL    |                |
++------------+--------------+------+-----+---------+----------------+
+4 rows in set (0.020 sec)
+
+MariaDB [revisao]> insert into clientes (nome_cliente,email,estado)
+    -> values ('ETEC MCM',etecmcm@email.com','SP');
+    '> ';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '@email.com','SP');
+'' at line 2
+MariaDB [revisao]> insert into clientes (nome_cliente,email,estado)
+    -> VALUES ('ETEC MCM', 'etecmcm@email.com','SP');
+ERROR 1054 (42S22): Unknown column 'nome_cliente' in 'field list'
+MariaDB [revisao]> insert into clientes (nome,email,estado)
+    -> VALUES ('ETEC MCM', 'etecmcm@email.com','SP');
+Query OK, 1 row affected (0.010 sec)
+
+MariaDB [revisao]> SELECT * FROM CLIENTES;
++----------+------------+--------+-------------------+
+| nome     | id_cliente | estado | email             |
++----------+------------+--------+-------------------+
+| ETEC MCM |          1 | SP     | etecmcm@email.com |
++----------+------------+--------+-------------------+
+1 row in set (0.001 sec)
+
+MariaDB [revisao]> insert into clientes (nome,email,estado)
+    -> VALUES ('Rafaela', 'rafaela@email.com','SP'),
+    -> ('Vayego', 'vayego@email.com', 'SP'),
+    -> ('Lucia', lucia@email.com, 'MG'),
+    -> ('Lucia', 'lucia@email.com','BA');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '@email.com, 'MG'),
+('Lucia', 'lucia@email.com','BA')' at line 4
+MariaDB [revisao]> insert into clientes (nome,email,estado)
+    -> VALUES ('Rafaela', 'rafaela@email.com','SP'),
+    -> ('Vayego', 'vayego@email.com', 'SP'),
+    -> ('Lucia', 'lucia@email.com','BA');
+Query OK, 3 rows affected (0.004 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+MariaDB [revisao]> SELECT * FROM CLIENTES
+    -> ;
++----------+------------+--------+-------------------+
+| nome     | id_cliente | estado | email             |
++----------+------------+--------+-------------------+
+| ETEC MCM |          1 | SP     | etecmcm@email.com |
+| Rafaela  |          2 | SP     | rafaela@email.com |
+| Vayego   |          3 | SP     | vayego@email.com  |
+| Lucia    |          4 | BA     | lucia@email.com   |
++----------+------------+--------+-------------------+
+4 rows in set (0.000 sec)
