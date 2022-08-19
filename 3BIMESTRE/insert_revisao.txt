@@ -1,0 +1,94 @@
+C:\Users\Alunos>cd c:\xampp\mysql\bin
+
+c:\xampp\mysql\bin>mysql -u root
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 75
+
+MariaDB [(none)]> use revisao;
+Database changed
+MariaDB [revisao]> describe produtos;
++--------------+--------------+------+-----+---------+----------------+
+| Field        | Type         | Null | Key | Default | Extra          |
++--------------+--------------+------+-----+---------+----------------+
+| codigo       | int(11)      | NO   | PRI | NULL    | auto_increment |
+| nome_produto | varchar(255) | YES  |     | NULL    |                |
+| cor          | varchar(255) | YES  |     | NULL    |                |
+| preco        | decimal(5,2) | YES  |     | NULL    |                |
++--------------+--------------+------+-----+---------+----------------+
+4 rows in set (0.019 sec)
+
+MariaDB [revisao]> insert into produtos
+    -> (nome_produto,cor,preco)
+    -> values ('prego','cinza',0.50),
+    ->  ('mouse','preto',150.20);
+
+MariaDB [revisao]> insert into produtos
+    -> (nome_produto,cor,preco)
+    ->  values ('mouse','preto',150.20),
+    -> ('alcoól em gel 100g','transparente',25.78),
+    -> ('Jogo de cadeira de madeira','bege',426.31),
+    -> ('almofada','rosa e vermelho',38.70),
+    -> ('sofá','vermelho',4500.76),
+    -> ('mochila','listrada',80.54),
+    -> ('estojo','azul',45.69),
+    -> ('lâmpada','branca',38.65),
+    ->  ('marreta','preta',30.20);
+Query OK, 9 rows affected, 1 warning (0.011 sec)
+Records: 9  Duplicates: 0  Warnings: 1
+
+MariaDB [revisao]> select * from produtos;
++--------+----------------------------+-----------------+--------+
+| codigo | nome_produto               | cor             | preco  |
++--------+----------------------------+-----------------+--------+
+|      1 | prego                      | cinza           |   0.50 |
+|      2 | mouse                      | preto           | 150.20 |
+|      3 | mouse                      | preto           | 150.20 |
+|      4 | alcoól em gel 100g         | transparente    |  25.78 |
+|      5 | Jogo de cadeira de madeira | bege            | 426.31 |
+|      6 | almofada                   | rosa e vermelho |  38.70 |
+|      7 | sofá                       | vermelho        | 999.99 |
+|      8 | mochila                    | listrada        |  80.54 |
+|      9 | estojo                     | azul            |  45.69 |
+|     10 | lâmpada                    | branca          |  38.65 |
+|     11 | marreta                    | preta           |  30.20 |
++--------+----------------------------+-----------------+--------+
+11 rows in set (0.000 sec)
+
+MariaDB [revisao]>MariaDB [revisao]> select * from clientes;
++------------+------------------+--------------------+--------+
+| id_cliente | nome_cliente     | email              | estado |
++------------+------------------+--------------------+--------+
+|          1 | ETEC MCM         | ETEC@EMAIL.COM     | SP     |
+|          2 | ETEC MAUA        | ETECMAUA@EMAIL.COM | SP     |
+|          3 | ETEC LAURO GOMES | ETECLG@EMAIL.COM   | RJ     |
++------------+------------------+--------------------+--------+
+3 rows in set (0.001 sec)
+
+MariaDB [revisao]> describe compras;
++-------------+---------+------+-----+---------+----------------+
+| Field       | Type    | Null | Key | Default | Extra          |
++-------------+---------+------+-----+---------+----------------+
+| nf          | int(11) | NO   | PRI | NULL    | auto_increment |
+| data_compra | date    | YES  |     | NULL    |                |
+| id_cliente  | int(11) | YES  | MUL | NULL    |                |
+| codigo      | int(11) | YES  | MUL | NULL    |                |
++-------------+---------+------+-----+---------+----------------+
+4 rows in set (0.018 sec)
+
+MariaDB [revisao]> insert into compras
+    -> (data_compra,id_cliente,codigo)
+    -> values ('2022-08-19',2,9),
+    -> ('2022-08-17',3,4),
+    -> ('2022-08-21',1,8);
+Query OK, 3 rows affected (0.011 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+MariaDB [revisao]> select * from compras;
++----+-------------+------------+--------+
+| nf | data_compra | id_cliente | codigo |
++----+-------------+------------+--------+
+|  1 | 2022-08-19  |          2 |      9 |
+|  2 | 2022-08-17  |          3 |      4 |
+|  3 | 2022-08-21  |          1 |      8 |
++----+-------------+------------+--------+
+3 rows in set (0.000 sec)
